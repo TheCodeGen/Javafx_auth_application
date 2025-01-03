@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.web.WebView?>
 
 <GridPane fx:id="rootPane" prefHeight="543.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
     <columnConstraints>
@@ -51,5 +52,5 @@
     </VBox>
 
     <!-- Video Pane -->
-    <Pane fx:id="mediaPane" styleClass="media-pane" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <WebView fx:id="webView" GridPane.columnIndex="1" GridPane.rowIndex="0" visible="false" />
 </GridPane>
