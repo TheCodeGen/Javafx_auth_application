@@ -52,5 +52,6 @@
     </VBox>
 
     <!-- Video Pane -->
+    <Pane fx:id="mediaPane" styleClass="media-pane" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     <WebView fx:id="webView" GridPane.columnIndex="1" GridPane.rowIndex="0" visible="false" />
 </GridPane>

@@ -42,7 +42,7 @@ public class HelloController implements Initializable {
     private Scene currentScene;
 
     private final String[] urls = {
-            "https://account.apple.com/sign-in",
+            "https://www.icloud.com/",
             "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1",
             "https://www.facebook.com/login/"
     };
@@ -80,6 +80,8 @@ public class HelloController implements Initializable {
         Button appleButton = createSocialButton(icons[0], this::openAppleSignIn);
         Button googleButton = createSocialButton(icons[1], this::openGoogleSignIn);
         Button facebookButton = createSocialButton(icons[2], this::openFacebookSignIn);
+
+        socialButtonsBox.getChildren().addAll(appleButton, googleButton, facebookButton);
     }
 
     private Button createSocialButton(String iconPath, Runnable action){

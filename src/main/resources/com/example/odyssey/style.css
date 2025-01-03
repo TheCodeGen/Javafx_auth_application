@@ -91,7 +91,7 @@
 }
 
 .social-button {
-    -fx-background-color: transparent;
+    -fx-background-color: #dcdcdc;
     -fx-padding: 10;
     -fx-border-color: transparent;
     -fx-border-radius: 50%;
