@@ -1,0 +1,124 @@
+.root {
+    -fx-padding: 10;
+    -fx-background-color: white; /* Default light mode */
+}
+
+/* *** ADDED *** Dark mode root styles */
+.root.dark-mode {
+    -fx-background-color: black;
+}
+
+.left-section {
+    -fx-padding: 40 50 40 50;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #497173;
+}
+
+.root.dark-mode .title-label{
+    -fx-text-fill: #ffd60a;
+}
+
+.root.dark-mode .subtitle-label,
+.root.dark-mode .or-label,
+.root.dark-mode .login-link {
+    -fx-text-fill: white;
+}
+
+
+.subtitle-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.or-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+
+.input-group > * {
+    -fx-padding: 10;
+    -fx-background-color: #FAFAFA;
+    -fx-prompt-text-fill: #000000;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-font-size: 16px;
+    -fx-font-family: Consolas;
+}
+
+.start-button {
+    -fx-background-color: #36634F;
+    -fx-text-fill: white;
+    -fx-background-radius: 25px;
+    -fx-border-radius: 25px;
+}
+
+.start-button:hover{
+    -fx-background-color: #000000;
+}
+
+.root.dark-mode .start-button{
+    -fx-background-color: #ffd60a;
+    -fx-text-fill: black;
+}
+
+.root.dark-mode .start-button:hover{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.login-link {
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-underline: false;
+}
+
+.login-link:hover{
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-underline: true;
+    -fx-effect: null;
+}
+
+.social-button {
+    -fx-background-color: transparent;
+    -fx-padding: 10;
+    -fx-border-color: transparent;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 40px;
+}
+
+.root.dark-mode .social-button{
+    -fx-background-color: white;
+}
+
+
+.media-pane {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #2E7D32;
+    -fx-border-width: 2;
+    -fx-background-color: black; /* Default background */
+}
+
+.root.dark-mode .media-pane {
+    -fx-background-color: #111111;
+}
+
+.darkmode-button{
+    -fx-text-fill: black;
+}
+
+.root.dark-mode .darkmode-button{
+    -fx-text-fill: white;
+}
