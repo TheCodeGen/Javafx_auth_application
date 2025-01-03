@@ -36,3 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+##mp4 files
+src/main/resources/*.mp4
