@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane fx:id="webviewPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.odyssey.WebViewController" stylesheets="webview-style.css">
+    <top>
+        <Button text="X" onAction="#goBack" styleClass="button" />
+    </top>
+    <center>
+        <WebView fx:id="webView" styleClass="web-view"/>
+    </center>
+</BorderPane>

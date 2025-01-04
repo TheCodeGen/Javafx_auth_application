@@ -1,0 +1,12 @@
+/* webview-style.css */
+.web-view {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 2px;
+}
+
+.button {
+    -fx-background-color: #ff0000; /* Red background */
+    -fx-text-fill: #ffffff;       /* White text */
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}

@@ -2,6 +2,7 @@ package com.example.odyssey;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -18,7 +19,9 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,6 +41,8 @@ public class HelloController implements Initializable {
 
     @FXML
     private WebView webView;
+
+    private Stage stage;
 
     private Scene currentScene;
 
@@ -97,6 +102,22 @@ public class HelloController implements Initializable {
         return button;
     }
 
+    private void openWebView(String url){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/odyssey/webview-scene.fxml"));
+            Scene webViewScene = new Scene(loader.load(), 1060, 670);
+
+            WebViewController controller = loader.getController();
+            controller.setStage(stage);
+            controller.setOnBackAction(() -> stage.setScene(currentScene));
+            controller.loadPage(url);
+
+            stage.setScene(webViewScene);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     private void openAppleSignIn(){
         openSocialSignIn("https://account.apple.com/sign-in");
     }
@@ -110,16 +131,16 @@ public class HelloController implements Initializable {
     }
 
     private void openSocialSignIn(String url){
-        mediaPane.setVisible(false);
-        webView.setVisible(true);
-        webView.getEngine().load(url);
+        openWebView(url);
     }
 
     public void setScene(Scene scene){
         this.currentScene = scene;
     }
 
-
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
 
     private void adjustMediaView(MediaView mediaView, Pane mediaPane) {
         double paneWidth = mediaPane.getWidth();
