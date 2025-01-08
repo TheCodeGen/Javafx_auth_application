@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
         Image image = new Image(getClass().getResource("/airplane.png").toExternalForm());
         Scene scene = new Scene(fxmlLoader.load());
         HelloController controller = fxmlLoader.getController();
+        controller.setStage(stage);
         controller.setScene(scene);
         stage.setTitle("Trip UI");
         stage.getIcons().add(image);
