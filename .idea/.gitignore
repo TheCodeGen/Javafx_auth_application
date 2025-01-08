@@ -7,4 +7,4 @@
 /dataSources/
 /dataSources.local.xml
 ##mp4 files
-/resources/*.mp4
+src/main/resources/*.mp4

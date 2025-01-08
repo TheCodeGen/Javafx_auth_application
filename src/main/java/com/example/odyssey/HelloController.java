@@ -16,6 +16,8 @@ import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebView;
+import javafx.scene.web.WebEngine;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +36,16 @@ public class HelloController implements Initializable {
     @FXML
     private GridPane rootPane;
 
+    @FXML
+    private WebView webView;
+
     private Scene currentScene;
+
+    private final String[] urls = {
+            "https://www.icloud.com/",
+            "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1",
+            "https://www.facebook.com/login/"
+    };
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -65,20 +76,43 @@ public class HelloController implements Initializable {
     }
 
     private void addSocialButtons() {
-        String[] icons = {"/apple-logo.png",
-                "/google.png",
-                "/facebook.png"};
+        String[] icons = {"/apple-logo.png", "/google.png", "/facebook.png"};
+        Button appleButton = createSocialButton(icons[0], this::openAppleSignIn);
+        Button googleButton = createSocialButton(icons[1], this::openGoogleSignIn);
+        Button facebookButton = createSocialButton(icons[2], this::openFacebookSignIn);
 
-        for (String iconPath : icons) {
-            ImageView icon = new ImageView(new Image(getClass().getResourceAsStream(iconPath)));
-            icon.setFitWidth(20);
-            icon.setFitHeight(20);
-            Button button = new Button();
-            button.setCursor(Cursor.HAND);
-            button.setGraphic(icon);
-            button.getStyleClass().add("social-button");
-            socialButtonsBox.getChildren().add(button);
-        }
+        socialButtonsBox.getChildren().addAll(appleButton, googleButton, facebookButton);
+    }
+
+    private Button createSocialButton(String iconPath, Runnable action){
+        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream(iconPath)));
+        icon.setFitWidth(20);
+        icon.setFitHeight(20);
+
+        Button button = new Button();
+        button.setCursor(Cursor.HAND);
+        button.setGraphic(icon);
+        button.getStyleClass().add("social-button");
+        button.setOnAction(e -> action.run());
+        return button;
+    }
+
+    private void openAppleSignIn(){
+        openSocialSignIn("https://account.apple.com/sign-in");
+    }
+
+    private void openGoogleSignIn(){
+        openSocialSignIn("https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1");
+    }
+
+    private void openFacebookSignIn(){
+        openSocialSignIn("https://www.facebook.com/login/");
+    }
+
+    private void openSocialSignIn(String url){
+        mediaPane.setVisible(false);
+        webView.setVisible(true);
+        webView.getEngine().load(url);
     }
 
     public void setScene(Scene scene){
