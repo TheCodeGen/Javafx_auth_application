@@ -6,7 +6,7 @@
 
 <BorderPane fx:id="webviewPane" stylesheets="@webview-style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.WebViewController">
     <top>
-        <Button onAction="#goBack" prefHeight="46.0" prefWidth="73.0" styleClass="button" />
+        <Button onAction="#goBack" prefHeight="46.0" prefWidth="49.0" styleClass="button" />
     </top>
     <center>
         <WebView fx:id="webView" styleClass="web-view" />
