@@ -98,8 +98,16 @@
     -fx-background-radius: 40px;
 }
 
+.social-button:hover{
+    -fx-background-color: white;
+}
+
 .root.dark-mode .social-button{
     -fx-background-color: white;
+}
+
+.root.dark-mode .social-button:hover{
+    -fx-effect: dropshadow(gaussian, rgba(154, 154, 154, 0.31), 2, 1, 2, 3);
 }
 
 
