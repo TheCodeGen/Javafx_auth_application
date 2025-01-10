@@ -7,7 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -41,6 +43,15 @@ public class HelloController implements Initializable {
 
     @FXML
     private WebView webView;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private PasswordField passwordField;
 
     private Stage stage;
 
@@ -159,6 +170,16 @@ public class HelloController implements Initializable {
 
         mediaView.setTranslateX((paneWidth - mediaView.getFitWidth()) / 2);
         mediaView.setTranslateY((paneHeight - mediaView.getFitHeight()) / 2);
+    }
+
+    public void createAccount(Event ActionEvent){
+        String name = nameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()){
+            System.out.println("Enter credentials to create an account");
+        }
     }
 
     @FXML
