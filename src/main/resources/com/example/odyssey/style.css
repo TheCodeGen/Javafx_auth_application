@@ -54,6 +54,16 @@
     -fx-font-family: Consolas;
 }
 
+.text-field-error{
+    -fx-border-color: transparent transparent linear-gradient(to right, red, yellow, green) transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.root.dark-mode .text-field-error{
+    -fx-border-color: transparent transparent #0000bb transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
 .start-button {
     -fx-background-color: #36634F;
     -fx-text-fill: white;

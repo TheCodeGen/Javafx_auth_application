@@ -1,5 +1,6 @@
 package com.example.odyssey;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +54,7 @@ public class HelloController implements Initializable {
 
     @FXML
     private PasswordField passwordField;
+
 
     private Stage stage;
 
@@ -172,13 +175,18 @@ public class HelloController implements Initializable {
         mediaView.setTranslateY((paneHeight - mediaView.getFitHeight()) / 2);
     }
 
-    public void createAccount(Event ActionEvent){
-        String name = nameField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
+    @FXML
+    public void createAccount(ActionEvent event){
+        validateField(nameField);
+        validateField(emailField);
+        validateField(passwordField);
+    }
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty()){
-            System.out.println("Enter credentials to create an account");
+    private void validateField(TextField field){
+        if (field.getText().trim().isEmpty() && !field.getStyleClass().contains("text-field-error")){
+            field.getStyleClass().add("text-field-error");
+        }else{
+            field.getStyleClass().remove("text-field-error");
         }
     }
 
