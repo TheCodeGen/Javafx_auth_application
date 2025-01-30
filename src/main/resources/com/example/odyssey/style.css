@@ -55,7 +55,7 @@
 }
 
 .text-field-error{
-    -fx-border-color: transparent transparent linear-gradient(to right, red, yellow, green) transparent;
+    -fx-border-color: transparent transparent linear-gradient(to right, red, darkred, firebrick) transparent;
     -fx-border-width: 0 0 1px 0;
 }
 

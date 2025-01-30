@@ -1,5 +1,6 @@
 package com.example.odyssey;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -91,6 +92,7 @@ public class HelloController implements Initializable {
         mediaPane.heightProperty().addListener((obs, oldHeight, newHeight) -> adjustMediaView(mediaView, mediaPane));
 
         mediaPane.getChildren().add(mediaView);
+
         mediaPlayer.play();
     }
 
