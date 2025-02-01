@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -26,7 +23,7 @@ import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -61,6 +58,13 @@ public class HelloController implements Initializable {
 
     private Scene currentScene;
 
+    @FXML
+    private PrintWriter pw;
+
+    private int columns;
+
+    private int rows;
+
     private final String[] urls = {
             "https://www.icloud.com/",
             "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1",
@@ -68,8 +72,18 @@ public class HelloController implements Initializable {
     };
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize (URL url, ResourceBundle resourceBundle)  {
         addSocialButtons();
+        columns = 5;
+        rows = 5;
+
+        FileWriter filewriter = null;
+        try {
+            filewriter = new FileWriter("Database.txt", true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        pw = new PrintWriter(filewriter);
 
         // Video setup (unchanged)
         String videoPath = getClass().getResource("/video6.mp4").toExternalForm();
@@ -179,17 +193,41 @@ public class HelloController implements Initializable {
 
     @FXML
     public void createAccount(ActionEvent event){
-        validateField(nameField);
-        validateField(emailField);
-        validateField(passwordField);
+        boolean isNameComplete = validateField(nameField);
+        boolean isEmailComplete = validateField(emailField);
+        boolean isPasswordComplete = validateField(passwordField);
+
+
+        if(isNameComplete && isEmailComplete && isPasswordComplete){
+            String name = nameField.getText().trim();
+            String email = emailField.getText().trim();
+            String password = passwordField.getText().trim();
+            if (password.length() < 5){
+                Label s1 = new Label("Password Length should be more than 5 character");
+
+            }
+            //String encryptedPassword = encrypt(password);
+            System.out.printf("%s,%s,%s", name, email, password);
+            pw.printf("%n%s,%s,%s", name, email, password);
+            pw.flush();
+        }
     }
 
-    private void validateField(TextField field){
+    /*private String encrypt(String message){
+        String[][] stringarray = new String[rows][columns];
+
+    }*/
+
+
+    private Boolean validateField(TextField field){
+        boolean result = true;
         if (field.getText().trim().isEmpty() && !field.getStyleClass().contains("text-field-error")){
             field.getStyleClass().add("text-field-error");
+            result = false;
         }else{
             field.getStyleClass().remove("text-field-error");
         }
+        return result;
     }
 
     @FXML
