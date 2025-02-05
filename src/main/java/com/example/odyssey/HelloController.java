@@ -1,5 +1,6 @@
 package com.example.odyssey;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -21,8 +22,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
+import javafx.util.Duration;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +53,9 @@ public class HelloController implements Initializable {
     @FXML
     private PasswordField passwordField;
 
+    @FXML
+    private Label password_error_message;
+
 
     private Stage stage;
 
@@ -74,6 +77,8 @@ public class HelloController implements Initializable {
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)  {
         addSocialButtons();
+        password_error_message.setVisible(false);
+        password_error_message.setManaged(false);
         columns = 5;
         rows = 5;
 
@@ -93,7 +98,7 @@ public class HelloController implements Initializable {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         MediaView mediaView = new MediaView(mediaPlayer);
-        mediaView.setPreserveRatio(true);
+       mediaView.setPreserveRatio(true);
 
         Rectangle clip = new Rectangle();
         clip.setArcWidth(60);
@@ -104,6 +109,7 @@ public class HelloController implements Initializable {
 
         mediaPane.widthProperty().addListener((obs, oldWidth, newWidth) -> adjustMediaView(mediaView, mediaPane));
         mediaPane.heightProperty().addListener((obs, oldHeight, newHeight) -> adjustMediaView(mediaView, mediaPane));
+
 
         mediaPane.getChildren().add(mediaView);
 
@@ -197,19 +203,23 @@ public class HelloController implements Initializable {
         boolean isEmailComplete = validateField(emailField);
         boolean isPasswordComplete = validateField(passwordField);
 
-
         if(isNameComplete && isEmailComplete && isPasswordComplete){
             String name = nameField.getText().trim();
             String email = emailField.getText().trim();
             String password = passwordField.getText().trim();
-            if (password.length() < 5){
-                Label s1 = new Label("Password Length should be more than 5 character");
-
+            if (password.length() < 5 && !password.isEmpty()){
+                password_error_message.setVisible(true);
+                password_error_message.setManaged(true);
+            }else{
+                password_error_message.setVisible(false);
+                password_error_message.setManaged(false);
+                //String encryptedPassword = encrypt(password);
+                System.out.printf("%s,%s,%s", name, email, password);
+                pw.printf("%s,%s,%s%n", name, email, password);
+                pw.flush();
             }
-            //String encryptedPassword = encrypt(password);
-            System.out.printf("%s,%s,%s", name, email, password);
-            pw.printf("%n%s,%s,%s", name, email, password);
-            pw.flush();
+            TranslateTransition slideOut = new TranslateTransition(Duration.millis(500), mediaPane);
+            slideOut.setToX(-1000);
         }
     }
 

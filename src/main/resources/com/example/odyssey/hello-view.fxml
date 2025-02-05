@@ -36,6 +36,7 @@
                 </font></TextField>
             <PasswordField fx:id="passwordField" prefWidth="230.0" promptText="Password" styleClass="input-field" />
         </VBox>
+      <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
 
         <Button alignment="CENTER" minHeight="-Infinity" onAction="#createAccount" prefHeight="45.0" prefWidth="262.0" styleClass="start-button" text="Start" textAlignment="CENTER">
             <font>

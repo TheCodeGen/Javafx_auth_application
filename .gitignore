@@ -38,3 +38,5 @@ build/
 .DS_Store
 ##mp4 files
 src/main/resources/*.mp4
+##idea folder
+.idea/

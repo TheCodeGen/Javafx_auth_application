@@ -137,6 +137,10 @@
     -fx-text-fill: black;
 }
 
+.password-error{
+    -fx-text-fill: red;
+}
+
 .root.dark-mode .darkmode-button{
     -fx-text-fill: white;
 }
