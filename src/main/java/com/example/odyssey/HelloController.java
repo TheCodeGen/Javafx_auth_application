@@ -43,9 +43,6 @@ public class HelloController implements Initializable {
     private GridPane rootPane;
 
     @FXML
-    private WebView webView;
-
-    @FXML
     private TextField nameField;
 
     @FXML

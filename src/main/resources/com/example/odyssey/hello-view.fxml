@@ -9,14 +9,14 @@
 <GridPane fx:id="rootPane" prefHeight="543.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
     <columnConstraints>
         <ColumnConstraints percentWidth="35" />
-        <ColumnConstraints hgrow="ALWAYS" percentWidth="65" />
+        <ColumnConstraints  percentWidth="65" minWidth="200" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />
     </rowConstraints>
 
     <!-- Left Section -->
-    <VBox alignment="CENTER" spacing="10" styleClass="left-section" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500">
+    <VBox alignment="CENTER" spacing="10" styleClass="left-section" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500" >
         <Label fx:id="titleLabel" styleClass="title-label" text="voyger" />
         <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="262.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
             <font>
@@ -53,6 +53,5 @@
     </VBox>
 
     <!-- Video Pane -->
-    <Pane fx:id="mediaPane" styleClass="media-pane" GridPane.columnIndex="1" GridPane.rowIndex="0" minWidth="400"/>
-    <WebView fx:id="webView" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Pane fx:id="mediaPane" styleClass="media-pane" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 </GridPane>
