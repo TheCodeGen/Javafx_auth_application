@@ -9,7 +9,7 @@
 <GridPane fx:id="rootPane" prefHeight="543.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
     <columnConstraints>
         <ColumnConstraints percentWidth="35" />
-        <ColumnConstraints  percentWidth="65" minWidth="200" />
+        <ColumnConstraints  percentWidth="65"/>
     </columnConstraints>
     <rowConstraints>
         <RowConstraints vgrow="ALWAYS" />
