@@ -40,7 +40,7 @@ public class HelloController implements Initializable {
     private RadioButton darkModeToggle;
 
     @FXML
-    private GridPane rootPane;
+    private HBox rootPane;
 
     @FXML
     private TextField nameField;

@@ -6,22 +6,15 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 
-<GridPane fx:id="rootPane" prefHeight="543.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
-    <columnConstraints>
-        <ColumnConstraints percentWidth="35" />
-        <ColumnConstraints  percentWidth="65"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints vgrow="ALWAYS" />
-    </rowConstraints>
-
+<HBox fx:id="rootPane" prefHeight="543.0" prefWidth="1000.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController" spacing="0">
     <!-- Left Section -->
-    <VBox alignment="CENTER" spacing="10" styleClass="left-section" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="500" >
+    <VBox alignment="CENTER" spacing="10" styleClass="left-section" prefWidth="350" minWidth="50" HBox.hgrow="ALWAYS">
         <Label fx:id="titleLabel" styleClass="title-label" text="voyger" />
         <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="262.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
             <font>
                 <Font name="Franklin Gothic Heavy Italic" size="46.0" />
-            </font></Label>
+            </font>
+        </Label>
 
         <!-- Social Icons -->
         <HBox fx:id="socialButtonsBox" alignment="CENTER" spacing="15" />
@@ -33,10 +26,11 @@
             <TextField fx:id="emailField" promptText="Email" styleClass="input-field">
                 <font>
                     <Font size="14.0" />
-                </font></TextField>
+                </font>
+            </TextField>
             <PasswordField fx:id="passwordField" prefWidth="230.0" promptText="Password" styleClass="input-field" />
         </VBox>
-      <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
+        <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
 
         <Button alignment="CENTER" minHeight="-Infinity" onAction="#createAccount" prefHeight="45.0" prefWidth="262.0" styleClass="start-button" text="Start" textAlignment="CENTER">
             <font>
@@ -44,14 +38,16 @@
             </font>
             <cursor>
                 <Cursor fx:constant="HAND" />
-            </cursor></Button>
+            </cursor>
+        </Button>
         <Hyperlink styleClass="login-link" text="Already have an account? Log in" visited="true">
             <font>
                 <Font size="14.0" />
-            </font></Hyperlink>
+            </font>
+        </Hyperlink>
         <RadioButton fx:id="darkModeToggle" mnemonicParsing="false" onAction="#setDarkMode" styleClass="darkmode-button" text="DarkMode" />
     </VBox>
 
-    <!-- Video Pane -->
-    <Pane fx:id="mediaPane" styleClass="media-pane" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-</GridPane>
+    <!-- Right Section (Video Pane) -->
+    <Pane fx:id="mediaPane" styleClass="media-pane" minWidth="200" HBox.hgrow="ALWAYS" />
+</HBox>
