@@ -1,7 +1,5 @@
 package com.example.odyssey;
 
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -12,17 +10,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.web.WebView;
-import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -54,17 +48,12 @@ public class HelloController implements Initializable {
     @FXML
     private Label password_error_message;
 
+    @FXML
+    private PrintWriter pw;
 
     private Stage stage;
 
     private Scene currentScene;
-
-    @FXML
-    private PrintWriter pw;
-
-    private int columns;
-
-    private int rows;
 
     private final String[] urls = {
             "https://www.icloud.com/",
@@ -86,7 +75,6 @@ public class HelloController implements Initializable {
         }
         pw = new PrintWriter(filewriter);
 
-        // Video setup (unchanged)
         String videoPath = getClass().getResource("/video6.mp4").toExternalForm();
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -106,9 +94,7 @@ public class HelloController implements Initializable {
         mediaPane.widthProperty().addListener((obs, oldWidth, newWidth) -> adjustMediaView(mediaView, mediaPane));
         mediaPane.heightProperty().addListener((obs, oldHeight, newHeight) -> adjustMediaView(mediaView, mediaPane));
 
-
         mediaPane.getChildren().add(mediaView);
-
         mediaPlayer.play();
     }
 
@@ -146,7 +132,7 @@ public class HelloController implements Initializable {
 
             stage.setScene(webViewScene);
         }catch (IOException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -206,7 +192,7 @@ public class HelloController implements Initializable {
             if (password.length() < 5 && !password.isEmpty()){
                 password_error_message.setVisible(true);
                 password_error_message.setManaged(true);
-            }else{
+            }else if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
                 password_error_message.setVisible(false);
                 password_error_message.setManaged(false);
                 String encryptedPassword = encrypt(password);
@@ -215,13 +201,14 @@ public class HelloController implements Initializable {
                 pw.flush();
             }
         }
+        nameField.clear();
+        emailField.clear();
+        passwordField.clear();
     }
 
     private String encrypt(String message){
         return BCrypt.hashpw(message, BCrypt.gensalt());
     }
-
-    //private String verifyPassword(String password);
 
     private Boolean validateField(TextField field){
         boolean result = true;
