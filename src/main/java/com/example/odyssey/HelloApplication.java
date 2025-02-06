@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         stage.setTitle("Trip UI");
         stage.getIcons().add(image);
         stage.setScene(scene);
+        //stage.setMinWidth(800);
         stage.show();
     }
 

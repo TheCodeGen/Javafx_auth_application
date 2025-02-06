@@ -144,3 +144,13 @@
 .root.dark-mode .darkmode-button{
     -fx-text-fill: white;
 }
+
+.parent-border{
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+}
+
+.parent-border > *{
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+}

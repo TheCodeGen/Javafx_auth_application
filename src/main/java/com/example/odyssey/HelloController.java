@@ -26,6 +26,7 @@ import javafx.util.Duration;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class HelloController implements Initializable {
 
@@ -79,8 +80,6 @@ public class HelloController implements Initializable {
         addSocialButtons();
         password_error_message.setVisible(false);
         password_error_message.setManaged(false);
-        columns = 5;
-        rows = 5;
 
         FileWriter filewriter = null;
         try {
@@ -213,21 +212,19 @@ public class HelloController implements Initializable {
             }else{
                 password_error_message.setVisible(false);
                 password_error_message.setManaged(false);
-                //String encryptedPassword = encrypt(password);
-                System.out.printf("%s,%s,%s", name, email, password);
-                pw.printf("%s,%s,%s%n", name, email, password);
+                String encryptedPassword = encrypt(password);
+                System.out.printf("%s,%s,%s", name, email, encryptedPassword);
+                pw.printf("%s,%s,%s%n", name, email, encryptedPassword);
                 pw.flush();
             }
-            TranslateTransition slideOut = new TranslateTransition(Duration.millis(500), mediaPane);
-            slideOut.setToX(-1000);
         }
     }
 
-    /*private String encrypt(String message){
-        String[][] stringarray = new String[rows][columns];
+    private String encrypt(String message){
+        return BCrypt.hashpw(message, BCrypt.gensalt());
+    }
 
-    }*/
-
+    //private String verifyPassword(String password);
 
     private Boolean validateField(TextField field){
         boolean result = true;

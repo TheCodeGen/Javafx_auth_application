@@ -3,7 +3,7 @@ module com.example.odyssey {
     requires javafx.fxml;
     requires javafx.media;
     requires javafx.web;
-
+    requires jbcrypt;
     opens com.example.odyssey to javafx.fxml;
     exports com.example.odyssey;
 }
