@@ -1,9 +1,11 @@
 package com.example.odyssey;
 
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -20,6 +23,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class HelloController implements Initializable {
@@ -51,7 +55,15 @@ public class HelloController implements Initializable {
     @FXML
     private PrintWriter pw;
 
+    @FXML
+    private Hyperlink loginToggle;
+
+    @FXML
+    private VBox left_Section;
+
     private Stage stage;
+
+    private boolean isLogin;
 
     private Scene currentScene;
 
@@ -82,7 +94,7 @@ public class HelloController implements Initializable {
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         MediaView mediaView = new MediaView(mediaPlayer);
-       mediaView.setPreserveRatio(true);
+        mediaView.setPreserveRatio(true);
 
         Rectangle clip = new Rectangle();
         clip.setArcWidth(60);
@@ -100,14 +112,14 @@ public class HelloController implements Initializable {
 
     private void addSocialButtons() {
         String[] icons = {"/apple-logo.png", "/google.png", "/facebook.png"};
-        Button appleButton = createSocialButton(icons[0], this::openAppleSignIn);
-        Button googleButton = createSocialButton(icons[1], this::openGoogleSignIn);
-        Button facebookButton = createSocialButton(icons[2], this::openFacebookSignIn);
+        Button appleButton = createSocialButton(icons[0]);
+        Button googleButton = createSocialButton(icons[1]);
+        Button facebookButton = createSocialButton(icons[2]);
 
         socialButtonsBox.getChildren().addAll(appleButton, googleButton, facebookButton);
     }
 
-    private Button createSocialButton(String iconPath, Runnable action){
+    private Button createSocialButton(String iconPath){
         ImageView icon = new ImageView(new Image(getClass().getResourceAsStream(iconPath)));
         icon.setFitWidth(20);
         icon.setFitHeight(20);
@@ -116,40 +128,7 @@ public class HelloController implements Initializable {
         button.setCursor(Cursor.HAND);
         button.setGraphic(icon);
         button.getStyleClass().add("social-button");
-        button.setOnAction(e -> action.run());
         return button;
-    }
-
-    private void openWebView(String url){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/odyssey/webview-scene.fxml"));
-            Scene webViewScene = new Scene(loader.load(), 1060, 670);
-
-            WebViewController controller = loader.getController();
-            controller.setStage(stage);
-            controller.setOnBackAction(() -> stage.setScene(currentScene));
-            controller.loadPage(url);
-
-            stage.setScene(webViewScene);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void openAppleSignIn(){
-        openSocialSignIn("https://account.apple.com/sign-in");
-    }
-
-    private void openGoogleSignIn(){
-        openSocialSignIn("https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1");
-    }
-
-    private void openFacebookSignIn(){
-        openSocialSignIn("https://www.facebook.com/login/");
-    }
-
-    private void openSocialSignIn(String url){
-        openWebView(url);
     }
 
     public void setScene(Scene scene){
@@ -196,7 +175,6 @@ public class HelloController implements Initializable {
                 password_error_message.setVisible(false);
                 password_error_message.setManaged(false);
                 String encryptedPassword = encrypt(password);
-                System.out.printf("%s,%s,%s", name, email, encryptedPassword);
                 pw.printf("%s,%s,%s%n", name, email, encryptedPassword);
                 pw.flush();
             }
@@ -212,7 +190,8 @@ public class HelloController implements Initializable {
 
     private Boolean validateField(TextField field){
         boolean result = true;
-        if (field.getText().trim().isEmpty() && !field.getStyleClass().contains("text-field-error")){
+        System.out.println(field.getStyleClass());
+        if (field.getText().trim().isEmpty() || !field.getStyleClass().contains("text-field-error")){
             field.getStyleClass().add("text-field-error");
             result = false;
         }else{
@@ -222,7 +201,7 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    public void setDarkMode(Event ActionEvent){
+    public void setDarkMode(ActionEvent event){
         currentScene.getStylesheets().clear();
 
         if (darkModeToggle.isSelected()){
@@ -234,5 +213,42 @@ public class HelloController implements Initializable {
         }
 
         System.out.println("Active Stylesheets!!" + currentScene.getStylesheets());
+    }
+
+    public void switchtoLogin(ActionEvent event){
+        System.out.println(mediaPane.getLayoutX() + ", " + left_Section.getLayoutX());
+        TranslateTransition videoTransition = new TranslateTransition();
+        videoTransition.setDuration(Duration.seconds(1));
+        videoTransition.setByX(left_Section.getLayoutX() - mediaPane.getLayoutX());
+
+        videoTransition.setInterpolator(Interpolator.EASE_BOTH);
+        videoTransition.setNode(mediaPane);
+        videoTransition.play();
+
+        TranslateTransition formTransition = new TranslateTransition();
+        formTransition.setDuration(Duration.seconds(1));
+        formTransition.setByX(currentScene.getWidth() - left_Section.getLayoutX() - left_Section.getLayoutBounds().getWidth());
+        formTransition.setInterpolator(Interpolator.EASE_BOTH);
+        formTransition.setNode(left_Section);
+        formTransition.play();
+        System.out.println(mediaPane.getLayoutX() + ", " + left_Section.getLayoutX());
+        new Thread(this::updateToLogin).start();
+
+        System.out.println(rootPane.getChildren());
+    }
+
+    private void updateToLogin(){
+        String videoPath = getClass().getResource("/video3.mp4").toExternalForm();
+        Media media = new Media(videoPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        Platform.runLater(() -> {
+            MediaView mediaView = (MediaView) mediaPane.getChildren().get(0);
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.play();
+        });
     }
 }
