@@ -4,16 +4,18 @@ import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
@@ -59,7 +61,13 @@ public class HelloController implements Initializable {
     private Hyperlink loginToggle;
 
     @FXML
-    private VBox left_Section;
+    private VBox signupPane;
+
+    @FXML
+    private VBox loginPane;
+
+    @FXML
+    private StackPane leftSection;
 
     private Stage stage;
 
@@ -78,6 +86,11 @@ public class HelloController implements Initializable {
         addSocialButtons();
         password_error_message.setVisible(false);
         password_error_message.setManaged(false);
+
+        loginPane.setVisible(false);
+        loginPane.setManaged(false);
+
+
 
         FileWriter filewriter = null;
         try {
@@ -216,25 +229,28 @@ public class HelloController implements Initializable {
     }
 
     public void switchtoLogin(ActionEvent event){
-        System.out.println(mediaPane.getLayoutX() + ", " + left_Section.getLayoutX());
-        TranslateTransition videoTransition = new TranslateTransition();
-        videoTransition.setDuration(Duration.seconds(1));
-        videoTransition.setByX(left_Section.getLayoutX() - mediaPane.getLayoutX());
+        if (!isLogin){
+            System.out.println(mediaPane.getLayoutX() + ", " + leftSection.getLayoutX());
+            TranslateTransition videoTransition = new TranslateTransition();
+            videoTransition.setDuration(Duration.seconds(1));
+            videoTransition.setByX(leftSection.getLayoutX() - mediaPane.getLayoutX());
 
-        videoTransition.setInterpolator(Interpolator.EASE_BOTH);
-        videoTransition.setNode(mediaPane);
-        videoTransition.play();
+            videoTransition.setInterpolator(Interpolator.EASE_BOTH);
+            videoTransition.setNode(mediaPane);
+            videoTransition.play();
 
-        TranslateTransition formTransition = new TranslateTransition();
-        formTransition.setDuration(Duration.seconds(1));
-        formTransition.setByX(currentScene.getWidth() - left_Section.getLayoutX() - left_Section.getLayoutBounds().getWidth());
-        formTransition.setInterpolator(Interpolator.EASE_BOTH);
-        formTransition.setNode(left_Section);
-        formTransition.play();
-        System.out.println(mediaPane.getLayoutX() + ", " + left_Section.getLayoutX());
-        new Thread(this::updateToLogin).start();
+            TranslateTransition formTransition = new TranslateTransition();
+            formTransition.setDuration(Duration.seconds(1));
+            formTransition.setByX(currentScene.getWidth() - leftSection.getLayoutX() - leftSection.getLayoutBounds().getWidth());
+            formTransition.setInterpolator(Interpolator.EASE_BOTH);
+            formTransition.setNode(leftSection);
+            formTransition.play();
+            System.out.println(mediaPane.getLayoutX() + ", " + leftSection.getLayoutX());
+            new Thread(this::updateToLogin).start();
 
-        System.out.println(rootPane.getChildren());
+            System.out.println(rootPane.getChildren());
+            isLogin = !isLogin;
+        }
     }
 
     private void updateToLogin(){

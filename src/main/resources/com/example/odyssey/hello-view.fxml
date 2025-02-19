@@ -7,45 +7,51 @@
 
 <HBox fx:id="rootPane" prefHeight="543.0" prefWidth="1000.0" spacing="0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
     <!-- Left Section -->
-    <VBox fx:id="left_Section" alignment="CENTER" minWidth="50" prefWidth="375" spacing="10" styleClass="left-section" HBox.hgrow="ALWAYS">
-        <Label fx:id="titleLabel" styleClass="title-label" text="Odyssey" />
-        <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="262.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
-            <font>
-                <Font name="Franklin Gothic Heavy Italic" size="46.0" />
-            </font>
-        </Label>
+    <StackPane fx:id="leftSection" HBox.hgrow="ALWAYS">
+        <VBox fx:id="signupPane" alignment="CENTER" minWidth="50" prefWidth="375" spacing="10" styleClass="signup-section" HBox.hgrow="ALWAYS">
+            <Label fx:id="titleLabel" styleClass="title-label" text="Odyssey" />
+            <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="262.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
+                <font>
+                    <Font name="Franklin Gothic Heavy Italic" size="46.0" />
+                </font>
+            </Label>
 
-        <!-- Social Icons -->
-        <HBox fx:id="socialButtonsBox" alignment="CENTER" spacing="15" />
+            <!-- Social Icons -->
+            <HBox fx:id="socialButtonsBox" alignment="CENTER" spacing="15" />
 
-        <Label fx:id="orLabel" minHeight="-Infinity" prefHeight="39.0" prefWidth="15.0" styleClass="or-label" text="or" />
+            <Label fx:id="orLabel" minHeight="-Infinity" prefHeight="39.0" prefWidth="15.0" styleClass="or-label" text="or" />
 
-        <VBox prefWidth="450.0" spacing="15" styleClass="input-group">
-            <TextField fx:id="nameField" alignment="TOP_LEFT" prefHeight="500.0" prefWidth="167.0" promptText="Full Name" styleClass="input-field" />
-            <TextField fx:id="emailField" prefHeight="500.0" prefWidth="450.0" promptText="Email" styleClass="input-field">
+            <VBox prefWidth="450.0" spacing="15" styleClass="input-group">
+                <TextField fx:id="nameField" alignment="TOP_LEFT" prefHeight="500.0" prefWidth="167.0" promptText="Full Name" styleClass="input-field" />
+                <TextField fx:id="emailField" prefHeight="500.0" prefWidth="450.0" promptText="Email" styleClass="input-field">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <PasswordField fx:id="passwordField" prefHeight="500.0" promptText="Password" styleClass="input-field" />
+            </VBox>
+            <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
+
+            <Button alignment="CENTER" maxWidth="Infinity" minHeight="-Infinity" onAction="#createAccount" prefHeight="45.0" prefWidth="450.0" styleClass="start-button" text="Start" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="17.0" />
+                </font>
+                <cursor>
+                    <Cursor fx:constant="HAND" />
+                </cursor>
+            </Button>
+            <Hyperlink fx:id="loginToggle" onAction="#switchtoLogin" styleClass="login-link" text="Already have an account? Log in" visited="true">
                 <font>
                     <Font size="14.0" />
                 </font>
-            </TextField>
-            <PasswordField fx:id="passwordField" prefHeight="500.0" promptText="Password" styleClass="input-field" />
+            </Hyperlink>
+            <RadioButton fx:id="darkModeToggle" mnemonicParsing="false" onAction="#setDarkMode" styleClass="darkmode-button" text="DarkMode" />
         </VBox>
-        <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
 
-        <Button alignment="CENTER" maxWidth="Infinity" minHeight="-Infinity" onAction="#createAccount" prefHeight="45.0" prefWidth="450.0" styleClass="start-button" text="Start" textAlignment="CENTER">
-            <font>
-                <Font name="System Bold" size="17.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </Button>
-        <Hyperlink fx:id="loginToggle" onAction="#switchtoLogin" styleClass="login-link" text="Already have an account? Log in" visited="true">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Hyperlink>
-        <RadioButton fx:id="darkModeToggle" mnemonicParsing="false" onAction="#setDarkMode" styleClass="darkmode-button" text="DarkMode" />
-    </VBox>
+        <VBox fx:id="loginPane" alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="login-section">
+            <Label text="This is random"/>
+        </VBox>
+    </StackPane>
 
     <!-- Right Section (Video Pane) -->
     <Pane fx:id="mediaPane" minWidth="200" styleClass="media-pane" HBox.hgrow="ALWAYS" />
