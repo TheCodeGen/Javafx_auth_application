@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox fx:id="rootPane" prefHeight="543.0" prefWidth="1000.0" spacing="0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
+<HBox fx:id="rootPane" prefHeight="543.0" prefWidth="1000.0" spacing="0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
     <!-- Left Section -->
     <StackPane fx:id="leftSection" HBox.hgrow="ALWAYS">
+        <!-- signupSection -->
         <VBox fx:id="signupPane" alignment="CENTER" minWidth="50" prefWidth="375" spacing="10" styleClass="signup-section" HBox.hgrow="ALWAYS">
             <Label fx:id="titleLabel" styleClass="title-label" text="Odyssey" />
             <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="262.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
@@ -48,8 +58,28 @@
             <RadioButton fx:id="darkModeToggle" mnemonicParsing="false" onAction="#setDarkMode" styleClass="darkmode-button" text="DarkMode" />
         </VBox>
 
-        <VBox fx:id="loginPane" alignment="CENTER" HBox.hgrow="ALWAYS" styleClass="login-section">
-            <Label text="This is random"/>
+        <!-- Login Section -->
+        <VBox fx:id="loginPane" minWidth="50" prefWidth="375" spacing="40" styleClass="login-section" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" spacing="7">
+                <ImageView fx:id="loginIcon" fitHeight="30" fitWidth="30" />
+                <Label alignment="TOP_LEFT" prefHeight="9.0" prefWidth="402.0" styleClass="login-title" text="Odyssey" />
+            </HBox>
+            <VBox spacing="0">
+                <Label styleClass="login-Text" text="Welcome Back" />
+                <HBox alignment="CENTER_LEFT" prefWidth="437.0" spacing="3">
+                    <Label id="registered-link" text="Not registered yet?" />
+                    <Hyperlink id="signin-link" onAction="#switchtoSignup" text="Sign up" />
+                </HBox>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="437.0" spacing="30.0" styleClass="">
+                <TextField prefHeight="46.0" prefWidth="437.0" promptText="Username or Email" styleClass="login-input" />
+                <PasswordField prefHeight="51.0" prefWidth="437.0" promptText="Password" styleClass="login-input" />
+                <Button prefHeight="52.0" prefWidth="455.0" styleClass="login-button" text="Sign In">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </VBox>
         </VBox>
     </StackPane>
 

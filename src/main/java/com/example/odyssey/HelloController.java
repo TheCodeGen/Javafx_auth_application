@@ -1,7 +1,6 @@
 package com.example.odyssey;
 
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,8 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -69,17 +66,14 @@ public class HelloController implements Initializable {
     @FXML
     private StackPane leftSection;
 
+    @FXML
+    private ImageView loginIcon;
+
     private Stage stage;
 
     private boolean isLogin;
 
     private Scene currentScene;
-
-    private final String[] urls = {
-            "https://www.icloud.com/",
-            "https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Faccounts.google.com%2F&followup=https%3A%2F%2Faccounts.google.com%2F&ifkv=AeZLP989ZgpMl-PYm6nx9J3p6FEJHgLfruptoEE5DkJWJw2GbLhLf6lfgVHq4qnMGbLUpKs1OCX_&passive=1209600&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S-79867073%3A1735928021022193&ddm=1",
-            "https://www.facebook.com/login/"
-    };
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)  {
@@ -87,10 +81,11 @@ public class HelloController implements Initializable {
         password_error_message.setVisible(false);
         password_error_message.setManaged(false);
 
+        Image image = new Image(getClass().getResource("/airplane.png").toExternalForm());
+        loginIcon.setImage(image);
+
         loginPane.setVisible(false);
         loginPane.setManaged(false);
-
-
 
         FileWriter filewriter = null;
         try {
@@ -234,27 +229,112 @@ public class HelloController implements Initializable {
             TranslateTransition videoTransition = new TranslateTransition();
             videoTransition.setDuration(Duration.seconds(1));
             videoTransition.setByX(leftSection.getLayoutX() - mediaPane.getLayoutX());
-
             videoTransition.setInterpolator(Interpolator.EASE_BOTH);
             videoTransition.setNode(mediaPane);
-            videoTransition.play();
 
             TranslateTransition formTransition = new TranslateTransition();
             formTransition.setDuration(Duration.seconds(1));
             formTransition.setByX(currentScene.getWidth() - leftSection.getLayoutX() - leftSection.getLayoutBounds().getWidth());
             formTransition.setInterpolator(Interpolator.EASE_BOTH);
             formTransition.setNode(leftSection);
-            formTransition.play();
             System.out.println(mediaPane.getLayoutX() + ", " + leftSection.getLayoutX());
-            new Thread(this::updateToLogin).start();
+
+            FadeTransition fadeoutTransition = new FadeTransition();
+            fadeoutTransition.setDuration(Duration.seconds(0.3));
+            fadeoutTransition.setFromValue(1);
+            fadeoutTransition.setToValue(0);
+            fadeoutTransition.setInterpolator(Interpolator.EASE_BOTH);
+            fadeoutTransition.setNode(signupPane);
+
+            FadeTransition fadeinTransition = new FadeTransition();
+            fadeinTransition.setDuration(Duration.seconds(0.3));
+            fadeinTransition.setFromValue(0);
+            fadeinTransition.setToValue(1);
+            fadeinTransition.setInterpolator(Interpolator.EASE_BOTH);
+            fadeinTransition.setNode(loginPane);
+
+            fadeoutTransition.setOnFinished(e -> {
+                signupPane.setManaged(false);
+                signupPane.setVisible(false);
+                loginPane.setManaged(true);
+                loginPane.setVisible(true);
+                fadeinTransition.play();
+            });
+
+            videoTransition.play();
+            formTransition.play();
+            fadeoutTransition.play();
+
+            Platform.runLater(this::updateToLogin);
 
             System.out.println(rootPane.getChildren());
             isLogin = !isLogin;
         }
     }
 
+    public void switchtoSignup(ActionEvent event){
+        if (isLogin){
+            System.out.println(isLogin);
+            TranslateTransition videoTransition = new TranslateTransition();
+            videoTransition.setDuration(Duration.seconds(1));
+            videoTransition.setByX(-(leftSection.getLayoutX() - mediaPane.getLayoutX()));
+            videoTransition.setInterpolator(Interpolator.EASE_BOTH);
+            videoTransition.setNode(mediaPane);
+
+            TranslateTransition formTransition = new TranslateTransition();
+            formTransition.setDuration(Duration.seconds(1));
+            formTransition.setByX(-(currentScene.getWidth() - leftSection.getLayoutX()  - leftSection.getLayoutBounds().getWidth()));
+            formTransition.setInterpolator(Interpolator.EASE_BOTH);
+            formTransition.setNode(leftSection);
+
+            FadeTransition fadeoutTransition = new FadeTransition();
+            fadeoutTransition.setDuration(Duration.seconds(0.3));
+            fadeoutTransition.setFromValue(1);
+            fadeoutTransition.setToValue(0);
+            fadeoutTransition.setInterpolator(Interpolator.EASE_BOTH);
+            fadeoutTransition.setNode(loginPane);
+
+            FadeTransition fadeinTransition = new FadeTransition();
+            fadeinTransition.setDuration(Duration.seconds(0.3));
+            fadeinTransition.setFromValue(0);
+            fadeinTransition.setToValue(1);
+            fadeinTransition.setInterpolator(Interpolator.EASE_BOTH);
+            fadeinTransition.setNode(signupPane);
+
+            fadeoutTransition.setOnFinished(e -> {
+                loginPane.setManaged(false);
+                loginPane.setVisible(false);
+                signupPane.setManaged(true);
+                signupPane.setVisible(true);
+                fadeinTransition.play();
+            });
+
+            videoTransition.play();
+            formTransition.play();
+            fadeoutTransition.play();
+
+            Platform.runLater(this::updateToSignup);
+            isLogin = !isLogin;
+        }
+    }
+
     private void updateToLogin(){
         String videoPath = getClass().getResource("/video3.mp4").toExternalForm();
+        Media media = new Media(videoPath);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+
+        Platform.runLater(() -> {
+            MediaView mediaView = (MediaView) mediaPane.getChildren().get(0);
+            mediaView.setMediaPlayer(mediaPlayer);
+            mediaPlayer.play();
+        });
+    }
+
+    private void updateToSignup(){
+        String videoPath = getClass().getResource("/video6.mp4").toExternalForm();
         Media media = new Media(videoPath);
         MediaPlayer mediaPlayer = new MediaPlayer(media);
 

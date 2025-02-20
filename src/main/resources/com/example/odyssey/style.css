@@ -55,7 +55,7 @@
 }
 
 .text-field-error{
-    -fx-border-color: transparent transparent linear-gradient(to right, red, darkred, firebrick) transparent;
+    -fx-border-color: transparent transparent red transparent;
     -fx-border-width: 0 0 1px 0;
 }
 
@@ -143,4 +143,60 @@
 
 .root.dark-mode .darkmode-button{
     -fx-text-fill: white;
+}
+
+.login-section {
+    -fx-padding: 65 65 0 65;
+
+}
+
+.login-Text {
+    -fx-text-fill: #000000;
+    -fx-font-family: Avenir, Helvetica, Arial, sans-serif;
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
+}
+
+.login-input{
+    -fx-border-color: transparent transparent #E0E0E0 transparent;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-alignment: left;
+    -fx-font-family: Consolas;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.login-input:focused{
+    -fx-border-color: transparent transparent #000000 transparent;
+}
+
+.login-button{
+    -fx-background-color: black;
+    -fx-background-radius: 12;
+    -fx-font-family: Avenir, Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+}
+
+.login-button:hover{
+    -fx-text-fill: #03f881;
+}
+
+#registered-link{
+    -fx-text-fill: #9d9d9d;
+    -fx-font-size: 15;
+}
+
+#signin-link{
+    -fx-font-family: Avenir, Helvetica, Arial, sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-border-color: transparent;
+    -fx-font-size: 15;
+}
+
+.login-title{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
