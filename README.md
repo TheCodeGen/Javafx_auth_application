@@ -12,3 +12,8 @@
 - **JavaFX**: Used for building the graphical user interface.
 - **Maven**: Used for project dependency management and build automation.
 - **Bcrypt**: For securely hashing passwords.
+
+## Demonstration
+![Project Screenshot1](src/main/resources/demo1.png)
+
+![Project Screenshot2](src/main/resources/demo2.png)
