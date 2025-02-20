@@ -1,6 +1,6 @@
 # Odyssey
 
-**Odyssey** is a personal project that simulates a signup and login application for a travel agency. It allows users to securely register, log in, and manage their travel profiles.
+**Odyssey** is a simple yet modern looking javafx based personal project that simulates a signup and login application for a travel agency. It allows users to securely register, log in, and manage their travel profiles.
 
 ## Features
 - **User Signup**: New users can create an account by providing basic details.
