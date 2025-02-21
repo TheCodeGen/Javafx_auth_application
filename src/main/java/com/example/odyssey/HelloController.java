@@ -5,8 +5,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +16,6 @@ import javafx.scene.media.MediaView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,12 +26,6 @@ public class HelloController implements Initializable {
 
     @FXML
     private Pane mediaPane;
-
-    @FXML
-    private HBox socialButtonsBox;
-
-    @FXML
-    private RadioButton darkModeToggle;
 
     @FXML
     private HBox rootPane;
@@ -69,15 +60,10 @@ public class HelloController implements Initializable {
     @FXML
     private ImageView loginIcon;
 
-    private Stage stage;
-
     private boolean isLogin;
-
-    private Scene currentScene;
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)  {
-        addSocialButtons();
         password_error_message.setVisible(false);
         password_error_message.setManaged(false);
 
@@ -118,35 +104,6 @@ public class HelloController implements Initializable {
         mediaPlayer.play();
     }
 
-    private void addSocialButtons() {
-        String[] icons = {"/apple-logo.png", "/google.png", "/facebook.png"};
-        Button appleButton = createSocialButton(icons[0]);
-        Button googleButton = createSocialButton(icons[1]);
-        Button facebookButton = createSocialButton(icons[2]);
-
-        socialButtonsBox.getChildren().addAll(appleButton, googleButton, facebookButton);
-    }
-
-    private Button createSocialButton(String iconPath){
-        ImageView icon = new ImageView(new Image(getClass().getResourceAsStream(iconPath)));
-        icon.setFitWidth(20);
-        icon.setFitHeight(20);
-
-        Button button = new Button();
-        button.setCursor(Cursor.HAND);
-        button.setGraphic(icon);
-        button.getStyleClass().add("social-button");
-        return button;
-    }
-
-    public void setScene(Scene scene){
-        this.currentScene = scene;
-    }
-
-    public void setStage(Stage stage){
-        this.stage = stage;
-    }
-
     private void adjustMediaView(MediaView mediaView, Pane mediaPane) {
         double paneWidth = mediaPane.getWidth();
         double paneHeight = mediaPane.getHeight();
@@ -176,6 +133,7 @@ public class HelloController implements Initializable {
             String name = nameField.getText().trim();
             String email = emailField.getText().trim();
             String password = passwordField.getText().trim();
+
             if (password.length() < 5 && !password.isEmpty()){
                 password_error_message.setVisible(true);
                 password_error_message.setManaged(true);
@@ -187,6 +145,7 @@ public class HelloController implements Initializable {
                 pw.flush();
             }
         }
+
         nameField.clear();
         emailField.clear();
         passwordField.clear();
@@ -208,21 +167,6 @@ public class HelloController implements Initializable {
         return result;
     }
 
-    @FXML
-    public void setDarkMode(ActionEvent event){
-        currentScene.getStylesheets().clear();
-
-        if (darkModeToggle.isSelected()){
-            darkModeToggle.setText("LightMode");
-            rootPane.getStyleClass().add("dark-mode");
-        }else{
-            darkModeToggle.setText("DarkMode");
-            rootPane.getStyleClass().remove("dark-mode");
-        }
-
-        System.out.println("Active Stylesheets!!" + currentScene.getStylesheets());
-    }
-
     public void switchtoLogin(ActionEvent event){
         if (!isLogin){
             System.out.println(mediaPane.getLayoutX() + ", " + leftSection.getLayoutX());
@@ -234,7 +178,7 @@ public class HelloController implements Initializable {
 
             TranslateTransition formTransition = new TranslateTransition();
             formTransition.setDuration(Duration.seconds(1));
-            formTransition.setByX(currentScene.getWidth() - leftSection.getLayoutX() - leftSection.getLayoutBounds().getWidth());
+            formTransition.setByX(mediaPane.getScene().getWidth() - leftSection.getLayoutX() - leftSection.getLayoutBounds().getWidth());
             formTransition.setInterpolator(Interpolator.EASE_BOTH);
             formTransition.setNode(leftSection);
             System.out.println(mediaPane.getLayoutX() + ", " + leftSection.getLayoutX());
@@ -283,7 +227,7 @@ public class HelloController implements Initializable {
 
             TranslateTransition formTransition = new TranslateTransition();
             formTransition.setDuration(Duration.seconds(1));
-            formTransition.setByX(-(currentScene.getWidth() - leftSection.getLayoutX()  - leftSection.getLayoutBounds().getWidth()));
+            formTransition.setByX(-(mediaPane.getScene().getWidth() - leftSection.getLayoutX()  - leftSection.getLayoutBounds().getWidth()));
             formTransition.setInterpolator(Interpolator.EASE_BOTH);
             formTransition.setNode(leftSection);
 

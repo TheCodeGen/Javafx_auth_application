@@ -3,11 +3,6 @@
     -fx-background-color: white; /* Default light mode */
 }
 
-/* *** ADDED *** Dark mode root styles */
-.root.dark-mode {
-    -fx-background-color: black;
-}
-
 .signup-section {
     -fx-padding: 40 70 40 70;
     -fx-spacing: 15;
@@ -19,17 +14,6 @@
     -fx-font-weight: bold;
     -fx-text-fill: #497173;
 }
-
-.root.dark-mode .title-label{
-    -fx-text-fill: #ffd60a;
-}
-
-.root.dark-mode .subtitle-label,
-.root.dark-mode .or-label,
-.root.dark-mode .login-link {
-    -fx-text-fill: white;
-}
-
 
 .subtitle-label {
     -fx-font-weight: bold;
@@ -59,30 +43,14 @@
     -fx-border-width: 0 0 1px 0;
 }
 
-.root.dark-mode .text-field-error{
-    -fx-border-color: transparent transparent #0000bb transparent;
-    -fx-border-width: 0 0 1px 0;
-}
-
 .start-button {
     -fx-background-color: #36634F;
     -fx-text-fill: white;
-    -fx-background-radius: 25px;
-    -fx-border-radius: 25px;
+    -fx-background-radius: 12px;
 }
 
 .start-button:hover{
     -fx-background-color: #000000;
-}
-
-.root.dark-mode .start-button{
-    -fx-background-color: #ffd60a;
-    -fx-text-fill: black;
-}
-
-.root.dark-mode .start-button:hover{
-    -fx-background-color: white;
-    -fx-text-fill: black;
 }
 
 .login-link {
@@ -112,14 +80,6 @@
     -fx-background-color: white;
 }
 
-.root.dark-mode .social-button{
-    -fx-background-color: white;
-}
-
-.root.dark-mode .social-button:hover{
-    -fx-effect: dropshadow(gaussian, rgba(154, 154, 154, 0.31), 2, 1, 2, 3);
-}
-
 
 .media-pane {
     -fx-background-radius: 20;
@@ -129,20 +89,12 @@
     -fx-background-color: black;
 }
 
-.root.dark-mode .media-pane {
-    -fx-background-color: #111111;
-}
-
 .darkmode-button{
     -fx-text-fill: black;
 }
 
 .password-error{
     -fx-text-fill: red;
-}
-
-.root.dark-mode .darkmode-button{
-    -fx-text-fill: white;
 }
 
 .login-section {
