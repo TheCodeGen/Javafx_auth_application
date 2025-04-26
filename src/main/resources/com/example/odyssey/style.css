@@ -1,40 +1,37 @@
 .root {
     -fx-padding: 10;
-    -fx-background-color: white; /* Default light mode */
+    -fx-background-color: #fcfcfc;
+    -fx-brand-color: #497173;
 }
 
 .signup-section {
-    -fx-padding: 40 70 40 70;
+    -fx-padding: 0 30 0 30;
     -fx-spacing: 15;
     -fx-alignment: center;
 }
 
 .title-label {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #497173;
+    -fx-font-size: 3.3em;
+    -fx-font-family: "Poppins ExtraBold";
+    -fx-text-fill: -fx-brand-color;
 }
 
 .subtitle-label {
-    -fx-font-weight: bold;
     -fx-text-fill: #000000;
+    -fx-font-size: 2em;
+    -fx-font-family: "Inter SemiBold";
     -fx-wrap-text: true;
     -fx-text-alignment: center;
 }
 
-.or-label {
-    -fx-font-size: 16px;
-    -fx-text-fill: #000000;
-}
-
-
-.input-group > * {
-    -fx-padding: 10;
-    -fx-background-color: #E6E6E8;
-    -fx-prompt-text-fill: #000000;
+.input-field {
+    -fx-padding: 0 0 0 50;
+    -fx-background-color: #ffffff;
+    -fx-prompt-text-fill: #bdbdbd;
     -fx-border-radius: 10;
+    -fx-border-color: #949494;
     -fx-background-radius: 10;
-    -fx-font-size: 14px;
+    -fx-font-size: 1.5em;
     -fx-font-family: Consolas;
 }
 
@@ -44,28 +41,27 @@
 }
 
 .start-button {
-    -fx-background-color: #36634F;
+    -fx-background-color: -fx-brand-color;
     -fx-text-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-font-family: "Inter SemiBold";
     -fx-background-radius: 12px;
 }
 
 .start-button:hover{
-    -fx-background-color: #000000;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-border-radius: 12px;
+    -fx-background-color: #3ebd6e;
+    -fx-effect: dropshadow(gaussian, rgb(0, 0, 19), 0, 0.3, 5, 5);
+    -fx-translate-x: -4px;
+    -fx-translate-y: -4px;
 }
 
-.login-link {
-    -fx-text-fill: #000000;
-    -fx-font-weight: bold;
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-underline: false;
-}
-
-.login-link:hover{
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-underline: true;
-    -fx-effect: null;
+.login-link{
+    -fx-text-fill: black;
+    -fx-font-size: 1.2em;
 }
 
 .social-button {
@@ -89,16 +85,12 @@
     -fx-background-color: black;
 }
 
-.darkmode-button{
-    -fx-text-fill: black;
-}
-
 .password-error{
     -fx-text-fill: red;
 }
 
 .login-section {
-    -fx-padding: 65 65 0 65;
+    -fx-padding: 75 30 0 30;
 
 }
 
@@ -132,12 +124,17 @@
 }
 
 .login-button:hover{
-    -fx-text-fill: #03f881;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-background-color: #0019ff;
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgb(2, 2, 2), 0, 0.3, 5, 5);
+    -fx-translate-x: -4px;
+    -fx-translate-y: -4px;
 }
 
 #registered-link{
     -fx-text-fill: #9d9d9d;
-    -fx-font-size: 15;
 }
 
 #signin-link{

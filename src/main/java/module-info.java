@@ -5,6 +5,9 @@ module com.example.odyssey {
     requires javafx.web;
     requires jbcrypt;
     requires java.desktop;
+    requires com.fasterxml.jackson.databind;
+    requires java.sql;
+    requires io.github.cdimascio.dotenv.java;
     opens com.example.odyssey to javafx.fxml;
     exports com.example.odyssey;
 }

@@ -14,6 +14,6 @@
 - **Bcrypt**: For securely hashing passwords.
 
 ## Demonstration
-![Project Screenshot1](src/main/resources/demo1.png)
+![Project Screenshot1](src/main/resources/static/demo1.png)
 
-![Project Screenshot2](src/main/resources/demo2.png)
+![Project Screenshot2](src/main/resources/static/demo2.png)

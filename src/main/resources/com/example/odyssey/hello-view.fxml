@@ -1,58 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="rootPane" prefHeight="543.0" prefWidth="1000.0" spacing="0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.HelloController">
+<HBox fx:id="rootPane" prefHeight="650.0" prefWidth="1000.0" spacing="0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.odyssey.AppController">
     <!-- Left Section -->
     <StackPane fx:id="leftSection" HBox.hgrow="ALWAYS">
         <!-- signupSection -->
         <VBox fx:id="signupPane" alignment="CENTER" minWidth="50" prefWidth="375" spacing="10" styleClass="signup-section" HBox.hgrow="ALWAYS">
-            <Label fx:id="titleLabel" styleClass="title-label" text="Odyssey" />
-            <Label fx:id="subtitleLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="377.0" styleClass="subtitle-label" text="Start your perfect trip" wrapText="true">
-                <font>
-                    <Font name="Franklin Gothic Heavy Italic" size="46.0" />
-                </font>
-            <VBox.margin>
-               <Insets bottom="15.0" />
-            </VBox.margin>
-            </Label>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0">
+            <children>
+               <HBox alignment="CENTER" prefHeight="83.0" prefWidth="480.0" spacing="10.0">
+                  <children>
+                     <ImageView fitHeight="50.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../static/icons/compass.png" />
+                        </image>
+                     </ImageView>
+                        <Label alignment="CENTER" prefHeight="83.0" prefWidth="185.0" styleClass="title-label" text="Odyssey" />
+                  </children>
+               </HBox>
+                  <Label alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="86.0" prefWidth="323.0" styleClass="subtitle-label" text="Plan your next unforgettable journey" wrapText="true" />
+            </children>
+         </VBox>
 
             <VBox prefWidth="450.0" spacing="15" styleClass="input-group">
-                <TextField fx:id="nameField" alignment="TOP_LEFT" prefHeight="51.0" prefWidth="167.0" promptText="Full Name" styleClass="input-field" />
-                <TextField fx:id="emailField" prefHeight="51.0" prefWidth="450.0" promptText="Email" styleClass="input-field">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </TextField>
-                <PasswordField fx:id="passwordField" prefHeight="51.0" promptText="Password" styleClass="input-field" />
+                <StackPane alignment="CENTER_LEFT">
+                    <TextField fx:id="nameField" prefHeight="51.0" prefWidth="513.0" promptText="Full Name" styleClass="input-field" />
+                    <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
+                  <image>
+                     <Image url="@../../../static/icons/user.png" />
+                  </image></ImageView>
+                </StackPane>
+                <StackPane alignment="CENTER_LEFT">
+                    <TextField fx:id="emailField" prefHeight="51.0" prefWidth="450.0" promptText="Email" styleClass="input-field" />
+                    <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
+                        <image>
+                            <Image url="@../../../static/icons/mail.png" />
+                        </image></ImageView>
+                </StackPane>
+                <StackPane alignment="CENTER_LEFT">
+                    <PasswordField fx:id="passwordField" prefHeight="51.0" promptText="Password" styleClass="input-field" />
+                    <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
+                        <image>
+                            <Image url="@../../../static/icons/padlock.png" />
+                        </image></ImageView>
+                </StackPane>
             </VBox>
             <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
 
-            <Button alignment="CENTER" maxWidth="Infinity" minHeight="-Infinity" onAction="#createAccount" prefHeight="45.0" prefWidth="450.0" styleClass="start-button" text="Start" textAlignment="CENTER">
-                <font>
-                    <Font name="System Bold" size="17.0" />
-                </font>
-                <cursor>
-                    <Cursor fx:constant="HAND" />
-                </cursor>
-            </Button>
-            <Hyperlink fx:id="loginToggle" onAction="#switchtoLogin" styleClass="login-link" text="Already have an account? Log in">
-                <font>
-                    <Font size="14.0" />
-                </font>
-            </Hyperlink>
+            <Button alignment="CENTER" maxWidth="Infinity" minHeight="-Infinity" onAction="#createAccount" prefHeight="54.0" prefWidth="518.0" styleClass="start-button" text="Create Account" textAlignment="CENTER" />
+            <Hyperlink fx:id="loginToggle" onAction="#switchtoLogin" styleClass="login-link" text="Already have an account? Log in" />
         </VBox>
 
         <!-- Login Section -->
-        <VBox fx:id="loginPane" minWidth="50" prefWidth="375" spacing="40" styleClass="login-section" visible="false" HBox.hgrow="ALWAYS">
-            <HBox alignment="CENTER" spacing="7">
-                <ImageView fx:id="loginIcon" fitHeight="30" fitWidth="30" />
-                <Label alignment="TOP_LEFT" prefHeight="9.0" prefWidth="402.0" styleClass="login-title" text="Odyssey" />
+        <VBox fx:id="loginPane" minWidth="50" prefWidth="375" spacing="30" styleClass="login-section" visible="false" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="83.0" prefWidth="480.0" spacing="10.0">
+                <children>
+                    <ImageView fitHeight="50.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../static/icons/compass.png" />
+                        </image>
+                    </ImageView>
+                    <Label alignment="CENTER" prefHeight="83.0" prefWidth="185.0" styleClass="title-label" text="Odyssey" />
+                </children>
             </HBox>
             <VBox spacing="0">
                 <Label styleClass="login-Text" text="Welcome Back" />
@@ -62,13 +82,21 @@
                 </HBox>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="437.0" spacing="30.0" styleClass="">
-                <TextField prefHeight="46.0" prefWidth="437.0" promptText="Username or Email" styleClass="login-input" />
-                <PasswordField prefHeight="51.0" prefWidth="437.0" promptText="Password" styleClass="login-input" />
-                <Button prefHeight="52.0" prefWidth="455.0" styleClass="login-button" text="Sign In">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </Button>
+                <StackPane alignment="CENTER_LEFT">
+                    <TextField fx:id="loginUserField" prefHeight="51.0" prefWidth="513.0" promptText="Username" styleClass="input-field" />
+                    <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
+                        <image>
+                            <Image url="@../../../static/icons/user.png" />
+                        </image></ImageView>
+                </StackPane>
+                <StackPane alignment="CENTER_LEFT">
+                    <PasswordField fx:id="loginPasswordField" prefHeight="51.0" promptText="Password" styleClass="input-field" />
+                    <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
+                        <image>
+                            <Image url="@../../../static/icons/padlock.png" />
+                        </image></ImageView>
+                </StackPane>
+                <Button onAction="#loginUser" prefHeight="52.0" prefWidth="455.0" styleClass="login-button" text="Sign In" />
             </VBox>
         </VBox>
     </StackPane>

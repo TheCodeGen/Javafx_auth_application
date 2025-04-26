@@ -40,3 +40,5 @@ build/
 src/main/resources/*.mp4
 ##idea folder
 .idea/
+##secrets
+.env
