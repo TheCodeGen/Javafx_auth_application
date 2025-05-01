@@ -2,6 +2,7 @@ package com.example.odyssey;
 
 import java.io.IOException;
 
+import com.example.odyssey.controller.AppController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

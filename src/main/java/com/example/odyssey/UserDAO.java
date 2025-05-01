@@ -1,5 +1,6 @@
 package com.example.odyssey;
 
+import com.example.odyssey.model.User;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.sql.*;

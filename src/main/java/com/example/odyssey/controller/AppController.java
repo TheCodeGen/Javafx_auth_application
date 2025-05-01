@@ -1,5 +1,6 @@
-package com.example.odyssey;
+package com.example.odyssey.controller;
 
+import com.example.odyssey.UserService;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,7 +75,7 @@ public class AppController implements Initializable {
         loginPane.setManaged(false);
 
         String path = "https://videos.pexels.com/video-files/11340265/11340265-hd_1080_1920_60fps.mp4";
-        Media media = new Media(path);
+        Media media = new Media(getClass().getResource("/static/travelvideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);

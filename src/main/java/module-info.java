@@ -10,4 +10,8 @@ module com.example.odyssey {
     requires io.github.cdimascio.dotenv.java;
     opens com.example.odyssey to javafx.fxml;
     exports com.example.odyssey;
+    exports com.example.odyssey.controller;
+    opens com.example.odyssey.controller to javafx.fxml;
+    exports com.example.odyssey.model;
+    opens com.example.odyssey.model to javafx.fxml;
 }

@@ -1,5 +1,6 @@
 package com.example.odyssey;
 
+import com.example.odyssey.model.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UserService {

@@ -1,4 +1,4 @@
-package com.example.odyssey;
+package com.example.odyssey.model;
 
 public class User {
     private int userId;
