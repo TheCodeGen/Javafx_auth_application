@@ -8,9 +8,9 @@
 ---
 
 <p float="left">
-  <img src="src/main/resources/static/demo/img.png" width="400"/>
-  <img src="src/main/resources/static/demo/img_1.png" width="400"/>
-  <img src="src/main/resources/static/demo/img_2.png" width="400"/>
+  <img src="src/main/resources/static/demo/img.png" width="800"/>
+  <img src="src/main/resources/static/demo/img_1.png" width="800"/>
+  <img src="src/main/resources/static/demo/img_2.png" width="800"/>
 </p>
 
 ---
