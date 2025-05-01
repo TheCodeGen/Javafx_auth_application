@@ -1,7 +1,8 @@
 package com.example.odyssey.controller;
 
-import com.example.odyssey.UserService;
+import com.example.odyssey.service.ApiService;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,8 +18,8 @@ import javafx.scene.shape.Rectangle;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 import javafx.util.Duration;
-import org.mindrot.jbcrypt.BCrypt;
 
 public class AppController implements Initializable {
 
@@ -38,10 +39,7 @@ public class AppController implements Initializable {
     private PasswordField passwordField;
 
     @FXML
-    private Label password_error_message;
-
-    @FXML
-    private PrintWriter pw;
+    private Label passwordErrorLabel;
 
     @FXML
     private Hyperlink loginToggle;
@@ -56,25 +54,19 @@ public class AppController implements Initializable {
     private StackPane leftSection;
 
     @FXML
-    private TextField loginUserField;
+    private TextField loginUsernameField;
 
     @FXML
     private PasswordField loginPasswordField;
 
     private boolean isLogin;
 
-    private UserService userService;
-
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle)  {
         hidePasswordErrorMessage();
-
-        userService = new UserService();
-
         loginPane.setVisible(false);
         loginPane.setManaged(false);
 
-        String path = "https://videos.pexels.com/video-files/11340265/11340265-hd_1080_1920_60fps.mp4";
         Media media = new Media(getClass().getResource("/static/travelvideo.mp4").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
@@ -92,14 +84,8 @@ public class AppController implements Initializable {
 
         mediaPane.widthProperty().addListener((obs, oldWidth, newWidth) -> adjustMediaView(mediaView, mediaPane));
         mediaPane.heightProperty().addListener((obs, oldHeight, newHeight) -> adjustMediaView(mediaView, mediaPane));
-
         mediaPane.getChildren().add(mediaView);
         mediaPlayer.play();
-    }
-
-    public void hidePasswordErrorMessage(){
-        password_error_message.setVisible(false);
-        password_error_message.setManaged(false);
     }
 
     private void adjustMediaView(MediaView mediaView, Pane mediaPane) {
@@ -121,55 +107,75 @@ public class AppController implements Initializable {
         mediaView.setTranslateY((paneHeight - mediaView.getFitHeight()) / 2);
     }
 
+    public void hidePasswordErrorMessage(){
+        passwordErrorLabel.setVisible(false);
+        passwordErrorLabel.setManaged(false);
+    }
+
+    public void showPasswordErrorMessage(){
+        passwordErrorLabel.setVisible(true);
+        passwordErrorLabel.setManaged(true);
+    }
+
+    private void initializeLoginInfo(String username, String password) {
+        loginUsernameField.setText(username);
+        loginPasswordField.setText(password);
+    }
+
+    private Boolean allFieldsValid(TextField... field){
+        boolean valid = true;
+        for (TextField f : field){
+            if (f.getText().trim().isEmpty()){
+                f.getStyleClass().add("text-field-error");
+                valid = false;
+                break;
+            }else{
+                f.getStyleClass().remove("text-field-error");
+            }
+        }
+        return valid;
+    }
+
     @FXML
     public void createAccount(ActionEvent event) throws IOException {
-        boolean isNameComplete = validateField(nameField);
-        boolean isEmailComplete = validateField(emailField);
-        boolean isPasswordComplete = validateField(passwordField);
+        boolean isAllFieldsValid = allFieldsValid(nameField, emailField, passwordField);
 
-        if(isNameComplete && isEmailComplete && isPasswordComplete){
+        if(isAllFieldsValid){
             String name = nameField.getText().trim().toLowerCase();
             String email = emailField.getText().trim().toLowerCase();
-            String password = passwordField.getText().trim().toLowerCase();
+            String password = passwordField.getText().trim();
 
-            removePassWordErrorMessage();
-            String encryptedPassword = encrypt(password);
-            System.out.println("adding user");
-            userService.addUser(name, email, encryptedPassword);
+            hidePasswordErrorMessage();
+            CompletableFuture<Boolean> result = ApiService.registerUser(name, email, password);
+            result.thenAccept(success -> Platform.runLater(() -> {
+                if (success){
+                    new Alert(Alert.AlertType.INFORMATION, "Registration Successful").show();
+                    initializeLoginInfo(name, password);
+                }else{
+                    new Alert(Alert.AlertType.ERROR, "Registration Unsuccessful").show();
+                }
+            }));
         }
-
         nameField.clear();
         emailField.clear();
         passwordField.clear();
-        switchtoLogin(new ActionEvent());
+        switchToLogin(new ActionEvent());
     }
 
-    private void showPassWordErrorMessage() {
-        password_error_message.setVisible(true);
-        password_error_message.setManaged(true);
+    public void loginUser(ActionEvent event) throws IOException {
+        String userInfo = loginUsernameField.getText().toLowerCase();
+        String password = loginPasswordField.getText().toLowerCase();
+        CompletableFuture<Boolean> result = ApiService.loginUser(userInfo, password);
+        result.thenAccept(success -> Platform.runLater(() -> {
+            if (success){
+                new Alert(Alert.AlertType.INFORMATION, "Login Successful").show();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Login Unsuccessful").show();
+            }
+        }));
     }
 
-    private void removePassWordErrorMessage() {
-        password_error_message.setVisible(false);
-        password_error_message.setManaged(false);
-    }
-
-    private String encrypt(String message){
-        return BCrypt.hashpw(message, BCrypt.gensalt());
-    }
-
-    private Boolean validateField(TextField field){
-        boolean result = true;
-        if (field.getText().trim().isEmpty()){
-            field.getStyleClass().add("text-field-error");
-            result = false;
-        }else{
-            field.getStyleClass().remove("text-field-error");
-        }
-        return result;
-    }
-
-    public void switchtoLogin(ActionEvent event){
+    public void switchToLogin(ActionEvent event){
         if (!isLogin){
             TranslateTransition videoTransition = new TranslateTransition();
             videoTransition.setDuration(Duration.seconds(1));
@@ -213,7 +219,7 @@ public class AppController implements Initializable {
         }
     }
 
-    public void switchtoSignup(ActionEvent event){
+    public void switchToSignup(ActionEvent event){
         if (isLogin){
             TranslateTransition videoTransition = new TranslateTransition();
             videoTransition.setDuration(Duration.seconds(1));
@@ -254,16 +260,6 @@ public class AppController implements Initializable {
             fadeoutTransition.play();
 
             isLogin = !isLogin;
-        }
-    }
-
-    public void loginUser(ActionEvent event) throws IOException {
-        String userInfo = loginUserField.getText().toLowerCase();
-        String password = loginPasswordField.getText().toLowerCase();
-        if (userService.verifyUser(userInfo, password)){
-            new Alert(Alert.AlertType.INFORMATION, "Login Successful").show();
-        }else{
-            new Alert(Alert.AlertType.ERROR, "Login Unsuccessful").show();
         }
     }
 }

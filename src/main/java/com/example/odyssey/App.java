@@ -9,14 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
-
 public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/odyssey/hello-view.fxml"));
-        Image image = new Image(getClass().getResource("/static/airplane.png").toExternalForm());
+        Image image = new Image(getClass().getResource("/static/icons/airplane.png").toExternalForm());
         Scene scene = new Scene(fxmlLoader.load());
         AppController controller = fxmlLoader.getController();
         stage.setTitle("Trip UI");

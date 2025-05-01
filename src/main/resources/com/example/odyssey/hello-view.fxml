@@ -56,10 +56,10 @@
                         </image></ImageView>
                 </StackPane>
             </VBox>
-            <Label fx:id="password_error_message" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
+            <Label fx:id="passwordErrorLabel" prefHeight="18.0" prefWidth="279.0" styleClass="password-error" text="Password should be longer than 5 characters" />
 
             <Button alignment="CENTER" maxWidth="Infinity" minHeight="-Infinity" onAction="#createAccount" prefHeight="54.0" prefWidth="518.0" styleClass="start-button" text="Create Account" textAlignment="CENTER" />
-            <Hyperlink fx:id="loginToggle" onAction="#switchtoLogin" styleClass="login-link" text="Already have an account? Log in" />
+            <Hyperlink fx:id="loginToggle" onAction="#switchToLogin" styleClass="login-link" text="Already have an account? Log in" />
         </VBox>
 
         <!-- Login Section -->
@@ -78,12 +78,12 @@
                 <Label styleClass="login-Text" text="Welcome Back" />
                 <HBox alignment="CENTER_LEFT" prefWidth="437.0" spacing="3">
                     <Label id="registered-link" text="Not registered yet?" />
-                    <Hyperlink id="signin-link" onAction="#switchtoSignup" text="Sign up" />
+                    <Hyperlink id="signin-link" onAction="#switchToSignup" text="Sign up" />
                 </HBox>
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="202.0" prefWidth="437.0" spacing="30.0" styleClass="">
                 <StackPane alignment="CENTER_LEFT">
-                    <TextField fx:id="loginUserField" prefHeight="51.0" prefWidth="513.0" promptText="Username" styleClass="input-field" />
+                    <TextField fx:id="loginUsernameField" prefHeight="51.0" prefWidth="513.0" promptText="Username" styleClass="input-field" />
                     <ImageView fitHeight="35.0" fitWidth="25.0" preserveRatio="true" translateX="15.0">
                         <image>
                             <Image url="@../../../static/icons/user.png" />

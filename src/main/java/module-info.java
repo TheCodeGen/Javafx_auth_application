@@ -8,6 +8,8 @@ module com.example.odyssey {
     requires com.fasterxml.jackson.databind;
     requires java.sql;
     requires io.github.cdimascio.dotenv.java;
+    requires java.net.http;
+    requires static lombok;
     opens com.example.odyssey to javafx.fxml;
     exports com.example.odyssey;
     exports com.example.odyssey.controller;

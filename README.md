@@ -1,19 +1,72 @@
-# Odyssey
+# 🌍 Odyssey – JavaFX Login & Signup UI
 
-**Odyssey** is a simple yet modern looking javafx based personal project that simulates a signup and login application for a travel agency. It allows users to securely register, log in, and manage their travel profiles.
+**Odyssey** is a sleek, modern JavaFX application featuring animated transitions, a looping video background, and a fully functional login/signup interface backed by a Spring Boot REST API.
 
-## Features
-- **User Signup**: New users can create an account by providing basic details.
-- **User Login**: Existing users can securely log in with their credentials.
-- **JavaFX User Interface**: The application features a clean, user-friendly interface powered by JavaFX.
+> 🎥 **Watch the build:** [Coming soon on YouTube](https://youtube.com/@yourchannel)  
+> 🔁 This version is optimized for learning and showcases JavaFX async UI + REST integration.
 
-## Technologies Used
-- **Java 23**: The core language for the application.
-- **JavaFX**: Used for building the graphical user interface.
-- **Maven**: Used for project dependency management and build automation.
-- **Bcrypt**: For securely hashing passwords.
+---
 
-## Demonstration
-![Project Screenshot1](src/main/resources/static/demo1.png)
+<p float="left">
+  <img src="src/main/resources/static/demo/img.png" width="400"/>
+  <img src="src/main/resources/static/demo/img_1.png" width="400"/>
+  <img src="src/main/resources/static/demo/img_2.png" width="400"/>
+</p>
 
-![Project Screenshot2](src/main/resources/static/demo2.png)
+---
+
+## ✨ Features
+
+- 🔐 **User Registration & Login** — Secure input with Spring Boot + BCrypt
+- ⚡ **Async API Calls** — Smooth, non-blocking login/signup using `CompletableFuture`
+- 🎞️ **Looping Video Background** — Powered by JavaFX `MediaPlayer`
+- 🧭 **Animated UI Transitions** — Seamless pane switching with FX animations
+- 🎨 **Modern CSS Styling** — Clean, responsive UI with hover/error states
+
+---
+
+## 🛠️ Tech Stack
+
+- **Java 23**
+- **JavaFX 23.0.1**
+- **Spring Boot (REST API)**
+- **Jackson** – JSON serialization/deserialization
+- **Lombok** – Clean code with less boilerplate
+- **BCrypt** – Password hashing
+- **HttpClient** – Java’s async HTTP library
+- **Maven** – with wrapper (`./mvnw`)
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/yourchannel/odyssey-javafx.git
+cd odyssey-javafx
+./mvnw clean javafx:run
+```
+
+---
+
+## 📂 Folder Structure
+
+```bash
+src/
+├── main/
+│   ├── java/
+│   │   └── com.example.odyssey/
+│   │       ├── App.java
+│   │       ├── controller/           # JavaFX controllers (LoginController, etc.)
+│   │       ├── model/                # POJOs like User, LoginRequest
+│   │       ├── service/              # Handles API calls, logic
+│   ├── resources/
+│   │   ├── com.example.odyssey/      # FXML layout files
+│   │   └── static/                   # Images, video background, CSS
+```
+
+
+
+### ✅ Final Thoughts
+
+This project proves that **JavaFX apps don’t have to look outdated.**  
+With modern design, animations, and clean backend integration — you can build real-world applications that *feel* premium.
