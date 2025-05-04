@@ -2,7 +2,7 @@
 
 **Odyssey** is a sleek, modern JavaFX application featuring animated transitions, a looping video background, and a fully functional login/signup interface backed by a Spring Boot REST API.
 
-> 🎥 **Watch the build:** [Coming soon on YouTube](https://youtube.com/@yourchannel)  
+> 🎥 **Watch the build:** (https://youtu.be/zVGB9NIBbto?si=9f4dWZwJ0zpgP4E7)  
 > 🔁 This version is optimized for learning and showcases JavaFX async UI + REST integration.
 
 ---
